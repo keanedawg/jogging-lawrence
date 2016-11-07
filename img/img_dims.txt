@@ -1,0 +1,21 @@
+The character was about 40x40 px, if I recall correctly.
+
+different animation frames is:
+
+S = Skinny
+M = Medium
+F = Fat
+P = Power
+
+FRAMES:
+    3   3   3    3
+   +---+---+---+---+
+   |JOG|JMP|DCK|DIE|
+   |===+===+===+===|
+S  |   |   |   |   |
+SM |   |   |   |   |
+M  |   |   |   |   |
+FM |   |   |   |   |
+F  |   |   |   |   |
+P  |   |   |   |XXX|
+   +---------------+
