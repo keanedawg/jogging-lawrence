@@ -1,0 +1,74 @@
+Goal - Get the highest score
+
+controls - enter to pause, start or unpause the game
+space - jump
+down - duck or go down while in air
+
+Screens
+- game over - GAME OVER over the game screen
+- pause - Giant button over almost the entire screen “press enter to unpause"
+- start game - play button
+- game screen
+hunger bar, goes down over 10 seconds and any food fills it up
+high score - goes up with time
+Coins count
+
+Joe - if anorexic a warning appears, if obese a warning appears
+anorexic - underweight - normal - overweight - obese
+
+Food
+Good food - celery, banana, apple - increases you towards anorexic
+Bad food - Hamburger, pizza, cheesecake - increase you towards obese
+
+
+Gym - appears once every 45 seconds
+Coins - 10 coins a minute - randomized
+
+Obstacles - hurtles and cones for ground, pigeons and baseballs for air
+
+Sound effects
+* start button push
+* jump
+* duck
+* coin
+* food
+* gym
+* pause/resume
+
+Images
+* Jeb - obese character - he rolls instead of duck
+* Bob - overweight character
+* Lawerence - normal weight character
+* Harmon - underweight character
+* Chad - anorexic character - his duck is a try to duck
+* Jog, duck, die, and jump for each character
+* Buff - invincible mode after going through gym 
+* or just sparkles on normal guy
+no animations to change between them
+invisibility
+
+background - city, farm, beach - 480 x 160 - width is screen x 1.5
+ground - goes up to 30 px - 160 x 30 - half of the screen width - pavement, dirt, sand
+player is from 0px to 40px
+background moves slower, ground moves faster to give player sense of moving faster
+gym - 160 x 80 - door is 50 high, need a locked door animations
+stair to gym
+bird - 3 frames
+baseball - 3 frames
+hurdle - 
+cone - 
+food - celery, banana, apple, cheesecake, pizza, hamburger - 20 x 20
+coin
+coin icon on screen
+hunger bar
+high score - 8 x 15
+score - 21 x 40
+pause button
+play game button
+game over text
+
+
+
+
+
+
