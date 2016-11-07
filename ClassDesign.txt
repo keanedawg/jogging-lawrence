@@ -1,0 +1,99 @@
+input
+logic
+moving
+collision detection
+drawing
+
+Game
+- has player
+- obstacles and food
+- drawer
+
+Drawing
+- has four layers of drawing
+- background, ground, player and objects, score and hunger bar
+
+Image
+- has globals to all images
+
+Sound Controller
+
+Audio
+- has globals to all audio files
+
+Person - effected by gravity
+- Hunger
+Coins
+Obstacles - hitbox, images(3 frames), hit sound effect, position 
+Flying Obstacles
+- bird, baseball
+Ground Obstacles
+- hurtle, and cone
+Food
+
+Drawer
+- draws instances
+
+Scenery
+- figure out background and foreground
+
+LevelGenerator
+- creates and deletes objects
+- figure out coins, obstacles, and food
+- has list of obstacles, coins and food
+- 2-3 every 10 seconds. all cannot be same thing
+
+Gym Spawner
+- figures out when the gym appears and handles data for it
+
+Score
+- high score and score
+- figure out how score increases
+- saves high score to file
+
+
+Game
+player
+levelGenerator
+
+
+
+LevelGenerator
+List of obstacle
+List of food
+List of coins
+speed  = scenery.getGroundSpeed
+getInstances - combines all the lists and returns it in one list
+genHealthyFood - random between three healthy
+genUnhealthyFood - random between three unhealthy food
+genGround - random between ground obstacles
+genFlying - random between flying obstacles
+genGroundPatch
+genFlyingPatch
+deleteInstances
+update - figure out how often theyre generate and destroy them
+
+
+
+Drawer
+
+drawInstances
+
+Scenery
+background
+ground
+background_speed
+ground_speed
+drawBackground
+drawGround
+draw
+getGroundSpeed
+
+
+
+
+
+
+
+
+
