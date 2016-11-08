@@ -51,11 +51,12 @@ Score
 - figure out how score increases
 - saves high score to file
 
-
+#################################
+TENTATIVE FINAL CLASSES
+#################################
 Game
 player
 levelGenerator
-
 
 
 LevelGenerator
