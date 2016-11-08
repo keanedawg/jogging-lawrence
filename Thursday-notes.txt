@@ -32,7 +32,7 @@ Sound effects
 * duck
 * coin
 * food
-* gym
+* gym sounds
 * pause/resume
 
 Images
