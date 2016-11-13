@@ -17,7 +17,7 @@ def set_map(map):
 	global _map
 	_map = map
 
-def init(width, height, title = 'Minotaur "game"'):
+def init(width, height, title = 'Jogging Lawrence'):
 	global _width, _height, _screen
 	_width = width
 	_height = height
@@ -44,10 +44,8 @@ def update():
 	_screen.fill((0, 0, 0))
 	draw_map()
 	for entity in _entities:
-		_screen.blit(pygame.transform.flip(
-							entity.sprite_sheet.subsurface(
-								entity.FRAMES[10 * entity.action + int(entity.frame)]
-							), entity.facing_right, False
+		_screen.blit( entity.sprite_sheet.subsurface(
+								entity.FRAMES[12 * entity.weight + int(entity.frame)]
 						),
 						(entity.x, entity.y))
 	pygame.display.flip()

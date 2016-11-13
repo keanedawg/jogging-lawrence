@@ -2,17 +2,15 @@ import pygame
 
 import map
 import events
-import objects
+import person
 import graphics
 
 framerate = 30
 ms_per_frame = (1. / framerate) / 1000
 
-graphics.init(240, 240)
+graphics.init(320, 160)
 
-minotaur = objects.Minotaur(10, 10)
-minotaur.facing_right = True
-minotaur.action = objects.Action.WALK
+minotaur = person.Person(10, 10)
 graphics.register(minotaur)
 
 print dir(map)
