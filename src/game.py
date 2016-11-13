@@ -1,3 +1,6 @@
+#!/usr/bin/env python2
+# So I (Alan) can execute the file.
+
 import pygame
 
 import map

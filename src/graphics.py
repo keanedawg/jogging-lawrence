@@ -26,26 +26,13 @@ def init(width, height, title = 'Jogging Lawrence'):
 	_screen = pygame.display.set_mode((_width, _height), pygame.DOUBLEBUF)
 	pygame.display.set_caption(title)
 
-def draw_map():
-	global _screen, _map
-	for x in xrange(_map.width):
-		for y in xrange(_map.height):
-			tile = _map[x, y]
-			tilex = tile % 30
-			tiley = tile / 30
-	
-			_screen.blit(
-					_map.tileset.subsurface((tilex * 16, tiley * 16, 16, 16)),
-					(x * 16, y * 16)
-			)
-
 def update():
 	global _screen, _entities
 	_screen.fill((0, 0, 0))
 	draw_map()
 	for entity in _entities:
 		_screen.blit( entity.sprite_sheet.subsurface(
-								entity.FRAMES[12 * entity.weight + int(entity.frame)]
+								entity.FRAMES[12 * entity.level + int(entity.frame)]
 						),
 						(entity.x, entity.y))
 	pygame.display.flip()
