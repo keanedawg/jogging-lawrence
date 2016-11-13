@@ -8,6 +8,6 @@ happy as long as he keeps jogging, so help him out with his goal!
 
 *Directories*
 src/ - The code.
-img/ - The images.
-aud/ - The sounds.
+src/img/ - The images.
+src/aud/ - The sounds.
 build/ - The final executables.
