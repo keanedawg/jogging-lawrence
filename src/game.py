@@ -8,14 +8,10 @@ import graphics
 framerate = 30
 ms_per_frame = (1. / framerate) / 1000
 
-graphics.init(320, 160)
+graphics.init(320 *2, 160 *2)
 
 minotaur = person.Person(10, 10)
 graphics.register(minotaur)
-
-print dir(map)
-game_map = map.sample_map()
-graphics.set_map(game_map)
 	
 clock = pygame.time.Clock()
 
