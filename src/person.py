@@ -19,7 +19,7 @@ class Action(object):
 	DUCK = 2
 	DIE  = 3
 	
-_SPR_DIM = 40
+_SPR_DIM = 40 * 2
 _SPR_ROWS = 6
 _SPR_COLS = 12
 
