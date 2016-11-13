@@ -42,6 +42,9 @@ LevelGenerator
 - figure out coins, obstacles, and food
 - has list of obstacles, coins and food
 - 2-3 every 10 seconds. all cannot be same thing
+- group - group of obstacles - ground and flying obstacles can't be over each other
+- cushion - space in between groups, measured in time instead of distance
+- patch - group of groups and cushions between them - same size cushions per patch (1 of 3 cushion), cushion outside patch would be double the size of the cushion inside the previious cushion
 
 Gym Spawner
 - figures out when the gym appears and handles data for it
@@ -51,49 +54,61 @@ Score
 - figure out how score increases
 - saves high score to file
 
-
+#################################
+TENTATIVE FINAL CLASSES
+#################################
 Game
-player
-levelGenerator
-
+-player
+-levelGenerator
+-highScore
+-time
 
 
 LevelGenerator
-List of obstacle
-List of food
-List of coins
-speed  = scenery.getGroundSpeed
-getInstances - combines all the lists and returns it in one list
-genHealthyFood - random between three healthy
-genUnhealthyFood - random between three unhealthy food
-genGround - random between ground obstacles
-genFlying - random between flying obstacles
-genGroundPatch
-genFlyingPatch
-deleteInstances
-update - figure out how often theyre generate and destroy them
+-List of obstacle
+-List of food
+-List of coins
+-speed  = scenery.getGroundSpeed
+getInstances() - combines all the lists and returns it in one list
+genHealthyFood() - random between three healthy
+genUnhealthyFood() - random between three unhealthy food
+genGround() - random between ground obstacles
+genFlying() - random between flying obstacles
+genGroundPatch()
+genFlyingPatch()
+deleteInstances()
+update() - figure out how often theyre generate and destroy them
 
 
 
 Drawer
+drawInstances() - should all work the same and draw image that is in the object
 
-drawInstances
 
 Scenery
-background
-ground
-background_speed
-ground_speed
-drawBackground
-drawGround
-draw
-getGroundSpeed
+-background
+-ground
+-background_speed
+-ground_speed
+drawBackground()
+drawGround()
+draw()
+getGroundSpeed()
+playBackgroundMusic()
 
 
+Player
+-score
+-hungerBar
+-coins
+-weight
+-isGoingToGym
+-playerSpace()
 
 
-
-
-
+Gym
+-isLocked
+drawSign()
+drawGym()
 
 
