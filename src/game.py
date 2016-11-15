@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-# So I (Alan) can execute the file.
+# So I (Alan) can execute the file easily.
 
 import pygame
 
@@ -7,32 +7,33 @@ import map
 import events
 import person
 import graphics
+import constants as con
+import gamespeed
+import scenery
 
-framerate = 30
-ms_per_frame = (1. / framerate) / 1000
+graphics.init(con.SCR_WIDTH, con.SCR_HEIGHT)
 
-graphics.init(320, 160)
+scene = scenery.Scenery()
+minotaur = person.Person()
 
-minotaur = person.Person(10, 10)
+graphics.register(scene)
 graphics.register(minotaur)
-
-print dir(map)
-game_map = map.sample_map()
-graphics.set_map(game_map)
 	
 clock = pygame.time.Clock()
 
 run = True
 lag = 0
 while(run):
-	ms = clock.tick(framerate)
-	lag = lag + ms - ms_per_frame
+	ms = clock.tick(con.framerate)
+	lag = lag + ms - con.ms_per_frame
+	gamespeed.update()
 	events.update()
 	minotaur.update()
+	scene.update()
 	
-	if lag > ms_per_frame:
+	if lag > con.ms_per_frame:
 		graphics.update()
-		lag -= ms_per_frame
+		lag -= con.ms_per_frame
 	
 	for e in events.event_queue:
 		if e.type == pygame.QUIT:
