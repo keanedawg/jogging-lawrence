@@ -4,7 +4,6 @@ import pygame
 
 import graphics
 import events
-import map
 import constants as con
 import gamespeed
 
@@ -112,7 +111,6 @@ class Person(pygame.Rect):
 
 				self.jump_released = False
 				self.action = Action.JUMP
-				print "You Jumped."
 
 	# This handles the input.
 	def input(self):
@@ -136,7 +134,6 @@ class Person(pygame.Rect):
 	def releaseSpace(self):
 		if self.jump_counter_enabled:
 			self.jump_released = True
-			print "SPACE RELEASED"
 
 	def checkDown(self):
 		if self.down_pressed and not self.jump_counter_enabled:

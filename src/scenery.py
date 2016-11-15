@@ -33,7 +33,6 @@ class Scenery(object):
 		self.bkgd_X -= gamespeed.speed * _BKGD_SPEED_DIVIDOR
 
 		self.fore_X = self.fore_X % self.fore_W
-		print self.fore_X, self.bkgd_X
 
 		self.fore_X1 = int(self.fore_X)
 		self.fore_X2 = self.fore_X1 - self.fore_W

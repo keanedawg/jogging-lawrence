@@ -3,7 +3,6 @@
 
 import pygame
 
-import map
 import events
 import person
 import graphics
