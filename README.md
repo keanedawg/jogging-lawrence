@@ -6,6 +6,8 @@ terrains while maintaining a healthy weight and dodging obstacles. Get far
 enough, and you can afford gym memberships to help Lawrence out. Lawrence is
 happy as long as he keeps jogging, so help him out with his goal!
 
+Wanna see what the game looks like? Check out this [demo video](https://youtu.be/DALLQcT9jKY).
+
 *Directories*
 src/ - The code.
 src/img/ - The images.
