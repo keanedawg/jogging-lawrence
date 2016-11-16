@@ -91,7 +91,10 @@ class Person(pygame.Rect):
 
 	# Based on the current action and weight, the frame is correctly updated.
 	def updateFrame(self):
-		self.frame = (self.frame + 0.05 * gamespeed.speed) % 3 + self.action * 3
+		if self.action == Action.RUN:
+			self.frame = (self.frame + 0.05 * gamespeed.speed) % 4
+		else:
+			self.frame = (self.frame + 0.05 * gamespeed.speed) % 3 + self.action * 3
 
 	# Will jump if the timer has gone up.
 	def checkJump(self):
@@ -153,5 +156,6 @@ class Person(pygame.Rect):
 			self.action = Action.RUN
 
 	def draw(self):
-		img = self.sprite_sheet.subsurface(self.FRAMES[_SPR_COLS * self.weight + int(self.frame)])
+		tmpFrame = 1 if self.action == Action.RUN and int(self.frame) == 3 else int(self.frame)
+		img = self.sprite_sheet.subsurface(self.FRAMES[_SPR_COLS * self.weight + tmpFrame])
 		graphics.blit(img, (self.x, self.y))
