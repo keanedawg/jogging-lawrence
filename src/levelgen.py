@@ -19,7 +19,7 @@ class Patch():
 
 	def generateObstacles():
 		for i in xrange(randint(1,3)):
-			if self.amountOfObstacles > 1 
+			if self.amountOfObstacles > 1
 			&& (self.obstacles[0].typeOfObstacle == Obstacles.CONE || self.obstacles[0].typeOfObstacle == Obstacles.HURDLE)
 			self.obstacles.append(Obstacle())
 
@@ -38,22 +38,23 @@ def genUnhealthyFood():
 
 
 def genGround():
-
-
+	pass
 
 def genFlying():
+	pass
 
 
 def genGroundPatch():
 	gPatch = Patch()
 	gPatch.amountOfObstacles = gPatch.generateObstacles
 
-
 def genFlyingPatch():
+	pass
 
 
 def deleteInstances():
+	pass
 
-
+# This will update very second and do stuff
 def update():
-
+	pass
