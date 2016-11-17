@@ -13,10 +13,10 @@ import scenery
 graphics.init(con.SCR_WIDTH, con.SCR_HEIGHT)
 
 scene = scenery.Scenery()
-minotaur = person.Person()
+lawrence = person.Person()
 
 graphics.register(scene)
-graphics.register(minotaur)
+graphics.register(lawrence)
 	
 clock = pygame.time.Clock()
 
@@ -27,7 +27,7 @@ while(run):
 	lag = lag + ms - con.ms_per_frame
 	gamespeed.update()
 	events.update()
-	minotaur.update()
+	lawrence.update()
 	scene.update()
 	
 	if lag > con.ms_per_frame:
