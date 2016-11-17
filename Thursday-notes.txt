@@ -1,3 +1,5 @@
+I am combo-ing right now.
+
 Goal - Get the highest score
 
 controls - enter to pause, start or unpause the game
@@ -42,7 +44,7 @@ Images
 * Harmon - underweight character
 * Chad - anorexic character - his duck is a try to duck
 * Jog, duck, die, and jump for each character
-* Buff - invincible mode after going through gym 
+* Buff - invincible mode after going through gym
 * or just sparkles on normal guy
 no animations to change between them
 invisibility
@@ -55,8 +57,8 @@ gym - 160 x 80 - door is 50 high, need a locked door animations
 stair to gym
 bird - 3 frames
 baseball - 3 frames
-hurdle - 
-cone - 
+hurdle -
+cone -
 food - celery, banana, apple, cheesecake, pizza, hamburger - 20 x 20
 coin
 coin icon on screen
@@ -66,9 +68,3 @@ score - 21 x 40
 pause button
 play game button
 game over text
-
-
-
-
-
-
