@@ -6,18 +6,30 @@ import graphics
 import events
 import constants as con
 import gamespeed
+from objects import EntityType as et
 
 class Physics(object):
 	# EARTH GRAVITY = 9.8 m/s - 1 m is about 22.8 px in this game.
 	GRAVITY = 22.8 / con.framerate
 	FALLING = GRAVITY * 6
-	JUMP = 6.5
+	JUMP = 7
 	SUPJUMP = 8.0
 	FRAME_JUMP_DELAY = con.framerate / 14 # SUPER JUMP after a fraction of a second.
 
 _SPR_DIM = 40
 _SPR_ROWS = 6
 _SPR_COLS = 12
+
+_RECT_W = 12
+_RECT_H = 30
+
+_RECT_XOFF = -13
+_RECT_YOFF = 0
+_RECT_YOFF_DUCK = 21
+
+_GROUND_PLAYER_HEAD = con.GROUND_Y - _SPR_DIM # The location of the top of the player relative to the ground.
+_GROUND_PLAYER_HEAD_DUCK = con.GROUND_Y - _SPR_DIM / 20 # The location of the top of the player relative to the ground when ducking.
+_PLAYER_RECT_X_START = 23
 
 class Weight(object):
 	ANOREXIC = 0
@@ -32,22 +44,20 @@ class Action(object):
 	DUCK = 2
 	DIE  = 3
 	
-class Person(pygame.Rect):
+class Person(object):
 	FRAMES = [(x * _SPR_DIM, y * _SPR_DIM, _SPR_DIM, _SPR_DIM) for y in xrange(_SPR_ROWS) for x in xrange(_SPR_COLS)]
 
 	def __init__(self):
 		self.sprite_sheet = graphics.load_image(os.path.join("img", "jogging_lawrence.png"))
-		self.w = _SPR_DIM
-		self.h = _SPR_DIM
+		self.rect = pygame.Rect(_PLAYER_RECT_X_START, _GROUND_PLAYER_HEAD, _RECT_W, _RECT_H)
 
 		self.jump_counter = 0
 		self.jump_counter_enabled = False
 		self.jump_released = False
 
-		self.down_pressed = False
+		self.dead_counter = 0
 
-		self.x = 10
-		self.y = con.GROUND_Y - self.h
+		self.down_pressed = False
 
 		# Horizontal and Vertical Speeds
 		self.hs = 0
@@ -64,29 +74,36 @@ class Person(pygame.Rect):
 
 	# This gets called by the game loop.
 	def update(self):
-		self.input()
-		self.checkDown()
-		self.checkJump()
-		self.move()
-		
-		self.updateFrame()
+		if self.isAlive():
+			self.input()
+			self.checkDown()
+			self.checkJump()
+			self.move()
+			# Moves the rectangle down if ducking.
+			if self.action == Action.DUCK:
+				self.rect.y += _RECT_YOFF_DUCK
+			self.updateFrame()
+		else:
+			#self.move()
+			#self.continueDeadTimer()
+			pass
 
 	# This handles gravity and movement.
 	def move(self):
-		self.y += self.vs
+		self.rect.y += self.vs
 
 		# If not touching the ground.
-		if self.y < con.GROUND_Y - self.h:
+		if self.rect.y < _GROUND_PLAYER_HEAD:
 			# If not falling, then gravity. If falling, then falling gravity.
 			self.vs += Physics.GRAVITY if not self.falling else Physics.FALLING
 			self.on_ground = False
 		else:
-			self.y = con.GROUND_Y - self.h
+			self.rect.y = _GROUND_PLAYER_HEAD
 			self.vs = 0
 			# If on ground, then not falling. Duh.
 			self.on_ground = True
 			self.falling = False
-			if self.action != Action.DUCK:
+			if self.action != Action.DUCK and self.action != Action.DIE:
 				self.action = Action.RUN
 
 	# Based on the current action and weight, the frame is correctly updated.
@@ -158,4 +175,36 @@ class Person(pygame.Rect):
 	def draw(self):
 		tmpFrame = 1 if self.action == Action.RUN and int(self.frame) == 3 else int(self.frame)
 		img = self.sprite_sheet.subsurface(self.FRAMES[_SPR_COLS * self.weight + tmpFrame])
-		graphics.blit(img, (self.x, self.y))
+		graphics.blit(img, (self.rect.x + _RECT_XOFF, self.rect.y + _RECT_YOFF))
+		# graphics.drawRect(self) # FOR TESTING
+
+	def isAlive(self):
+		return self.action != Action.DIE
+
+	def kill(self):
+		self.action = Action.DIE
+
+	def continueDeadTimer(self):
+		if self.frame < self.action * 3 + 2:
+			self.updateFrame()
+		else:
+			self.frame = self.action * 3 + 2
+
+	# Entity may be food or an obstacle. The difference is found by the type.
+	def collide(self, entity):
+		if entity.type == et.BALL or entity.type == et.BIRD or entity.type == et.CONE or entity.type == et.HURDLE:
+			entity.hit()
+			self.kill()
+
+		elif entity.type == et.PIZZA or entity.type == et.HAMBURGER or entity.type == et.CHEESECAKE:
+			entity.hit()
+			print "YUM!"
+			# Get bigger
+
+		elif entity.type == et.CELERY or entity.type == et.CARROT or entity.type == et.APPLE:
+			entity.hit()
+			print "I'M STILL HUNGRY!"
+			# Get thinner
+
+		else:
+			assert(False)

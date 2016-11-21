@@ -7,70 +7,119 @@ import events
 import constants as con
 import gamespeed
 
-class Food(object):
-	PIZZA 		= 0
-	HAMBURGER 	= 1
-	CHEESECAKE 	= 2
-	CELERY 		= 3
-	CARROT 		= 4
-	APPLE 		= 5
+OBJECT_SIZE=20
+OBJECT_FRAME_SPEED=.025
+OBJECT_NUM_OF_FRAMES=3
+_OBJ_VS=-4.0
+_GRAVITY = 22.8 / con.framerate
 
-class Obstacles(object):
-	CONE = 0
-	HURDLE = 1
-	BASEBALL = 3
-	BIRD = 4
+class EntityType(object):
+	NONE        = -1
+	BALL        = 0 # AIR
+	BIRD        = 1 # AIR
+	CONE        = 2 # GROUND
+	HURDLE      = 3 # GROUND
+	PIZZA 		= 4 # FAT
+	HAMBURGER 	= 5 # FAT
+	CHEESECAKE 	= 6 # FAT
+	CELERY 		= 7 # SKINNY
+	CARROT 		= 8 # SKINNY
+	APPLE 		= 9 # SKINNY
+
 
 class Food(pygame.Rect):
 	def __init__(self):
-		self.sprite_sheet
-		self.w = _SPR_DIM
-		self.h = _SPR_DIM
-
-		self.x = 10
-		self.y = con.GROUND_Y - self.h
-
-		# Horizontal and Vertical Speeds
-		self.hs = 0
-		self.vs = 0
-
-		self.eaten = False
-		self.isHealthy = False
-		self.food = Food.PIZZA
-
-		self.frame = 0
-		self.speed = 3
+		pass
 
 	def update(self):
-		checkEaten()
-		if(self.eaten)
-			destroyFruit()
-
+		pass
 
 	def checkEaten(self):
-		# if hit 
-		# self.eaten = True
+		pass
+
+	def hit(self):
 		pass
 
 	def destroyFruit(self):
 		pass
 
 	def updateFrame(self):
-		self.frame = (self.frame + 0.05 * gamespeed.speed) % 3 * 3
+		pass
 
 	def draw(self):
 		pass
 
-class Obstacle(pygame.Rect):
-	def __init__(self):
-		self.img
-		self.typeOfObstacle = Obstacles.CONE
+class Obstacle(object):
+	# ss_off - The vertical offset for the sprite sheet.
+	# xoff   - The starting x position. Relative to overall game's x.
+	# ground - True if this is a ground obstacle. False if this is a flying obstacle.
+	def __init__(self, ss_off, xoff, ground):
+		self.type = EntityType.NONE
+		self.sprite_sheet = graphics.load_image(os.path.join("img", "objects.png"))
+		self.xoff = xoff
+		self.x = gamespeed.pos + self.xoff
+		self.y = 0.
+		self.rect = pygame.Rect(self.x, self.y, OBJECT_SIZE, OBJECT_SIZE)
+		self.FRAMES = [(i * OBJECT_SIZE, ss_off * OBJECT_SIZE, OBJECT_SIZE, OBJECT_SIZE) for i in xrange(OBJECT_NUM_OF_FRAMES)]
+		self.frame = 0.
+		self.gravity = False
+		self.vs = 0.
 
-		def setToGround(self):
-			pass
+		if ground:
+			self.setToGround()
+		else:
+			self.setToFlying()
 
-		def setToFlying(self):
-			pass
+	def setToGround(self):
+		self.y = con.GROUND_Y - OBJECT_SIZE
 
-		def draw(self):
-			pass
+	def setToFlying(self):
+		self.y = con.GROUND_Y - OBJECT_SIZE * 2
+
+	def hit(self):
+		self.vs = _OBJ_VS
+		self.gravity = True
+
+	def draw(self):
+		img = self.sprite_sheet.subsurface(self.FRAMES[int(self.frame)])
+		graphics.blit(img, (self.x, self.y))
+		#graphics.drawRect(self) # FOR TESTING
+
+	def updateFrame(self):
+		self.frame = (self.frame + OBJECT_FRAME_SPEED * gamespeed.speed) % OBJECT_NUM_OF_FRAMES
+
+	def move(self):
+		self.x = gamespeed.pos + self.xoff
+
+		if self.gravity == True:
+			self.y += self.vs
+			self.vs += _GRAVITY
+
+	def update(self):
+		self.move()
+		self.updateFrame()
+		self.rect.x, self.rect.y = self.x, self.y
+
+########## OBSTACLES ###############
+
+class Bird(Obstacle):
+	# The x is how far away from the starting point of the ground the bird is and remains.
+	def __init__(self, xoff):
+		# The type contains the vertical offset as well.
+		super(Bird, self).__init__(EntityType.BIRD, xoff, False)
+		self.type = EntityType.BIRD
+
+class Ball(Obstacle):
+	def __init__(self, xoff):
+		super(Ball, self).__init__(EntityType.BALL, xoff, False)
+		self.type = EntityType.BALL
+
+class Cone(Obstacle):
+	def __init__(self, xoff):
+		super(Cone, self).__init__(EntityType.CONE, xoff, True)
+		self.type = EntityType.CONE
+
+class Hurdle(Obstacle):
+	def __init__(self, xoff):
+		super(Hurdle, self).__init__(EntityType.HURDLE, xoff, True)
+		self.type = EntityType.HURDLE
