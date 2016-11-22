@@ -1,5 +1,4 @@
 #!/usr/bin/env python2
-# So I (Alan) can execute the file easily.
 
 import pygame
 
@@ -9,14 +8,29 @@ import graphics
 import constants as con
 import gamespeed
 import scenery
+import objects
 
 graphics.init(con.SCR_WIDTH, con.SCR_HEIGHT)
 
 scene = scenery.Scenery()
 lawrence = person.Person()
 
+ents = []
+for x in xrange(1,51):
+	if x % 4 == 0:
+		ents.append(objects.Bird(x * 200))
+	elif x % 4 == 1:
+		ents.append(objects.Ball(x * 250))
+	elif x % 4 == 2:
+		ents.append(objects.Cone(x * 100))
+	else:
+		ents.append(objects.Hurdle(x * 200))
+
 graphics.register(scene)
 graphics.register(lawrence)
+
+for e in ents:
+	graphics.register(e)
 	
 clock = pygame.time.Clock()
 
@@ -25,10 +39,22 @@ lag = 0
 while(run):
 	ms = clock.tick(con.framerate)
 	lag = lag + ms - con.ms_per_frame
-	gamespeed.update()
+
+	# Game Logic
+	if lawrence.isAlive():
+		gamespeed.update()
+
 	events.update()
 	lawrence.update()
 	scene.update()
+	for e in ents:
+		e.update()
+
+	# Collision
+	if lawrence.isAlive():
+		for e in ents:
+			if lawrence.rect.colliderect(e.rect):
+				lawrence.collide(e)
 	
 	if lag > con.ms_per_frame:
 		graphics.update()

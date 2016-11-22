@@ -30,7 +30,7 @@ class Scenery(object):
 		self.bkgd_X1 = int(self.bkgd_X)
 		self.bkgd_X2 = self.bkgd_X1 - self.bkgd_W
 
-		self.bkgd_X -= gamespeed.speed * _BKGD_SPEED_DIVIDOR
+		self.bkgd_X = gamespeed.pos * _BKGD_SPEED_DIVIDOR
 
 		self.fore_X = self.fore_X % self.fore_W
 
@@ -38,7 +38,7 @@ class Scenery(object):
 		self.fore_X2 = self.fore_X1 - self.fore_W
 		self.fore_X3 = self.fore_X1 + self.fore_W
 
-		self.fore_X -= gamespeed.speed
+		self.fore_X = gamespeed.pos
 
 
 	def draw(self):

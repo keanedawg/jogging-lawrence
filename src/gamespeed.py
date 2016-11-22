@@ -2,7 +2,7 @@
 import constants as con
 
 # Constants
-_START_SPEED = int(con.SCR_WIDTH * 3/8 / con.framerate)
+_START_SPEED = con.SCR_WIDTH * 3/8 / con.framerate
 _MAX_SPEED = 2.0 * _START_SPEED
 _SPEED_LEVELS = 3.0
 
@@ -11,7 +11,7 @@ _ACCELERATION_INTERVAL = int(5 * con.framerate)
 _ACCELERATION = (_MAX_SPEED - _START_SPEED) / _SPEED_LEVELS
 
 def update():
-	global speed, frame
+	global speed, frame, pos
 
 	if frame % _ACCELERATION_INTERVAL == 0 and frame != 0:
 		if speed >= _MAX_SPEED:
@@ -19,12 +19,16 @@ def update():
 		else:
 			speed += _ACCELERATION
 
+	pos -= speed
 	frame += 1
 
-speed = _START_SPEED
-frame = 0
+# Global variables.
+speed = _START_SPEED # The current speed of the ground.
+pos   = 0            # The position of the starting point of the ground.
+frame = 0            # How many frames have been running.
 
 def reset():
 	global speed, frame
 	speed = _START_SPEED
+	pos = 0
 	frame = 0

@@ -45,6 +45,9 @@ def blit(surface, pos):
 	global _backBuf
 	surface = pygame.transform.scale(surface, (surface.get_width(), surface.get_height()))
 	_backBuf.blit(surface, (pos[0], pos[1]))	
+
+def drawRect(rect):
+	pygame.draw.rect(_backBuf, (0, 0, 0), rect)
 	
 def load_image(path):
 	global images
