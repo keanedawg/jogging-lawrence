@@ -43,7 +43,7 @@ class Action(object):
 	JUMP = 1
 	DUCK = 2
 	DIE  = 3
-	
+
 class Person(object):
 	FRAMES = [(x * _SPR_DIM, y * _SPR_DIM, _SPR_DIM, _SPR_DIM) for y in xrange(_SPR_ROWS) for x in xrange(_SPR_COLS)]
 
