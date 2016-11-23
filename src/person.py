@@ -18,7 +18,7 @@ class Physics(object):
 
 _SPR_DIM = 40
 _SPR_ROWS = 6
-_SPR_COLS = 12
+_SPR_COLS = 9
 
 _RECT_W = 12
 _RECT_H = 30
@@ -42,7 +42,6 @@ class Action(object):
 	RUN  = 0
 	JUMP = 1
 	DUCK = 2
-	DIE  = 3
 
 class Person(object):
 	FRAMES = [(x * _SPR_DIM, y * _SPR_DIM, _SPR_DIM, _SPR_DIM) for y in xrange(_SPR_ROWS) for x in xrange(_SPR_COLS)]
@@ -60,6 +59,7 @@ class Person(object):
 		# Horizontal and Vertical Speeds
 		self.hs = 0
 		self.vs = 0
+		self.alive = True
 
 		self.on_ground = True # If on the ground.
 		self.falling = False  # If down was pressed.
@@ -101,7 +101,7 @@ class Person(object):
 			# If on ground, then not falling. Duh.
 			self.on_ground = True
 			self.falling = False
-			if self.action != Action.DUCK and self.action != Action.DIE:
+			if self.action != Action.DUCK and self.alive == True:
 				self.action = Action.RUN
 
 	# Based on the current action and weight, the frame is correctly updated.
@@ -177,10 +177,10 @@ class Person(object):
 		# graphics.drawRect(self) # FOR TESTING
 
 	def isAlive(self):
-		return self.action != Action.DIE
+		return self.alive == True
 
 	def kill(self):
-		self.action = Action.DIE
+		self.alive = False
 
 	# Entity may be food or an obstacle. The difference is found by the type.
 	def collide(self, entity):
