@@ -26,7 +26,6 @@ class EntityType(object):
 	CARROT 		= 8 # SKINNY
 	APPLE 		= 9 # SKINNY
 
-
 class Food(pygame.Rect):
 	def __init__(self):
 		pass

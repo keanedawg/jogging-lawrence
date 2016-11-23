@@ -18,13 +18,13 @@ lawrence = person.Person()
 ents = []
 for x in xrange(1,51):
 	if x % 4 == 0:
-		ents.append(objects.Bird(x * 200))
+		ents.append(objects.Bird(x * 210))
 	elif x % 4 == 1:
-		ents.append(objects.Ball(x * 250))
+		ents.append(objects.Ball(x * 140))
 	elif x % 4 == 2:
 		ents.append(objects.Cone(x * 100))
 	else:
-		ents.append(objects.Hurdle(x * 200))
+		ents.append(objects.Hurdle(x * 77))
 
 graphics.register(scene)
 graphics.register(lawrence)

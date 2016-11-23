@@ -43,7 +43,7 @@ class Action(object):
 	JUMP = 1
 	DUCK = 2
 	DIE  = 3
-	
+
 class Person(object):
 	FRAMES = [(x * _SPR_DIM, y * _SPR_DIM, _SPR_DIM, _SPR_DIM) for y in xrange(_SPR_ROWS) for x in xrange(_SPR_COLS)]
 
@@ -54,8 +54,6 @@ class Person(object):
 		self.jump_counter = 0
 		self.jump_counter_enabled = False
 		self.jump_released = False
-
-		self.dead_counter = 0
 
 		self.down_pressed = False
 
@@ -84,9 +82,9 @@ class Person(object):
 				self.rect.y += _RECT_YOFF_DUCK
 			self.updateFrame()
 		else:
-			#self.move()
-			#self.continueDeadTimer()
 			pass
+			#self.move()
+			#self.updateFrame()
 
 	# This handles gravity and movement.
 	def move(self):
@@ -183,12 +181,6 @@ class Person(object):
 
 	def kill(self):
 		self.action = Action.DIE
-
-	def continueDeadTimer(self):
-		if self.frame < self.action * 3 + 2:
-			self.updateFrame()
-		else:
-			self.frame = self.action * 3 + 2
 
 	# Entity may be food or an obstacle. The difference is found by the type.
 	def collide(self, entity):
