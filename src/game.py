@@ -9,11 +9,13 @@ import constants as con
 import gamespeed
 import scenery
 import objects
+import score
 
 graphics.init(con.SCR_WIDTH, con.SCR_HEIGHT)
 
 scene = scenery.Scenery()
 lawrence = person.Person()
+sc = score.Score()
 
 ents = []
 for x in xrange(1,51):
@@ -28,6 +30,7 @@ for x in xrange(1,51):
 
 graphics.register(scene)
 graphics.register(lawrence)
+graphics.register(sc)
 
 for e in ents:
 	graphics.register(e)

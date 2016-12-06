@@ -26,17 +26,60 @@ class EntityType(object):
 	CARROT 		= 8 # SKINNY
 	APPLE 		= 9 # SKINNY
 
-class Food(pygame.Rect):
-	def __init__(self):
-		pass
+class Food(object):
+	# ss_off - The vertical offset for the sprite sheet.
+	# xoff   - The starting x position. Relative to overall game's x.
+	# ground - True if this is a ground obstacle. False if this is a flying obstacle.
+	def __init__(self, ss_off, xoff, level):
+		self.type = EntityType.NONE
+		self.sprite_sheet = graphics.load_image(os.path.join("img", "objects.png"))
+		self.xoff = xoff
+		self.x = gamespeed.pos + self.xoff
+		self.y = 0.
+		self.rect = pygame.Rect(self.x, self.y, OBJECT_SIZE, OBJECT_SIZE)
+		self.FRAMES = [(i * OBJECT_SIZE, ss_off * OBJECT_SIZE, OBJECT_SIZE, OBJECT_SIZE) for i in xrange(OBJECT_NUM_OF_FRAMES)]
+		self.frame = i * OBJECT_SIZE
+		self.gravity = False
+		self.vs = 0.
 
-	def update(self):
-		pass
+		if level == 3:
+			self.setToLevel3()
+		elif level == 2:
+			self.setToLevel2()
+		else:
+			self.setToLevel1()
 
-	def checkEaten(self):
-		pass
+	def setToLevel1(self):
+		self.y = con.GROUND_Y - OBJECT_SIZE
+
+	def setToLevel2(self):
+		self.y = con.GROUND_Y - OBJECT_SIZE * 2
+
+	def setToLevel3(self):
+		self.y = con.GROUND_Y - OBJECT_SIZE * 3
 
 	def hit(self):
+		self.vs = _OBJ_VS
+		self.gravity = True
+
+	def draw(self):
+		img = self.sprite_sheet.subsurface(self.FRAMES[int(self.frame)])
+		graphics.blit(img, (self.x, self.y))
+		#graphics.drawRect(self) # FOR TESTING
+
+	def move(self):
+		self.x = gamespeed.pos + self.xoff
+
+		if self.gravity == True:
+			self.y += self.vs
+			self.vs += _GRAVITY
+
+	def update(self):
+		self.move()
+		self.updateFrame()
+		self.rect.x, self.rect.y = self.x, self.y
+
+	def checkEaten(self):
 		pass
 
 	def destroyFruit(self):
