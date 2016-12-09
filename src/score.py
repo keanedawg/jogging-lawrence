@@ -1,6 +1,8 @@
 # NEED TO DRAW THE SCORE
 import pygame as pg
 import constants
+import graphics
+import os
 
 class Score(object):
     def __init__(self):
@@ -17,25 +19,25 @@ class Score(object):
         tmpScore = self._score
         digit = 0
         count = 0
-        while x in xrange(0,5):
+        # Get each digit of the score.
+        for x in xrange(0,5):
             if tmpScore != 0:
                 digit = tmpScore % 10
                 tmpScore /= 10
             else:
                 digit = 0
 
-            ind[x] = digit
-            self.nums[ind[x]]
+            self._inds[x] = digit
             
-        img = self.sprite_sheet.subsurface(self.FRAMES[int(self.frame)])
-        for 
+        # Print out each digit, starting at the least significant digit.
+        for x in xrange(0,5):
+            self.nums[self._inds[x]]
+            img = self.sprite_sheet.subsurface( (self._inds[x] * 20, 0, 20, 20) )
+            xpos = self.x - (self.wid + self.pad) * (x + 1)
+	    graphics.blit(img, (xpos, self.y, self.wid, self.wid) )
 
-    def addScore
+    def addScore(self,score):
+        self._score += score
         
     def reset(self):
         self.score = 0
-
-
-
-        
-

@@ -1,5 +1,4 @@
 #!/usr/bin/env python2
-
 import pygame
 
 import events
@@ -52,6 +51,10 @@ while(run):
 	scene.update()
 	for e in ents:
 		e.update()
+
+        # Update Score
+        if gamespeed.frame % 15 == 0:
+                sc.addScore(1)
 
 	# Collision
 	if lawrence.isAlive():
