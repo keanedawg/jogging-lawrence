@@ -127,6 +127,11 @@ class Person(object):
 				else:
 					self.vs = -Physics.SUPJUMP
 
+
+				effect = pygame.mixer.Sound(os.path.join('audio','jl_jump.ogg'))
+				effect.play()
+
+
 				self.jump_released = False
 				self.action = Action.JUMP
 
@@ -157,8 +162,16 @@ class Person(object):
 		if self.down_pressed and not self.jump_counter_enabled:
 			if self.on_ground: # If on ground, then duck.
 				self.action = Action.DUCK
+				##play duck audio
+			#	effect = pygame.mixer.Sound(os.path.join('audio','jl_duck.ogg'))
+			#	effect.play()
 			else: # If in air, then fall.
 				self.falling = True
+				##play fall audio
+			#	segfaults here??
+			#	effect = pygame.mixer.Sound(os.path.join('audio','jl_duck.ogg'))
+			#	effect.play()
+
 
 	# What happens when the player presses down.
 	def pressDown(self):
