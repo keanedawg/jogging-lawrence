@@ -26,15 +26,17 @@ lawrence = person.Person()
 sc = score.Score()
 
 ents = []
-for x in xrange(1,1000):
-	if x % 16 == 1:
-		ents.append(objects.Bird(x * random.randint(50, 500)))
-	elif x % 16 == 5:
-		ents.append(objects.Ball(x * random.randint(50, 500)))
-	elif x % 16 == 9:
-		ents.append(objects.Cone(x * random.randint(50, 500)))
-	elif x % 16 == 13:
-		ents.append(objects.Hurdle(x * random.randint(50, 500)))
+for x in xrange(6,500):
+	if x % 2 == 0:
+		y = random.randint(1,4)
+		if y == 1:
+			ents.append(objects.Bird((x * 80) + random.randint(0,100)))
+		elif y == 2:
+			ents.append(objects.Ball((x * 80) + random.randint(0,100)))
+		elif y == 3:
+			ents.append(objects.Cone((x * 80) + random.randint(0,100)))
+		elif y == 4:
+			ents.append(objects.Hurdle((x * 80) + random.randint(0,100)))
 
 graphics.register(scene)
 graphics.register(lawrence)
@@ -90,5 +92,5 @@ while(run):
 		elif e.type == pygame.KEYUP:
 			if e.key ==  pygame.K_F4 and (e.mod & pygame.KMOD_ALT):
 				run = False
-	
+
 pygame.quit()
