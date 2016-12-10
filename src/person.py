@@ -128,8 +128,9 @@ class Person(object):
 					self.vs = -Physics.SUPJUMP
 
 
-				effect = pygame.mixer.Sound(os.path.join('audio','jl_jump.ogg'))
-				effect.play()
+                	if con.audio_support:
+				   		effect = pygame.mixer.Sound(os.path.join('audio','jl_jump.ogg'))
+				   		effect.play()
 
 
 				self.jump_released = False
@@ -161,7 +162,7 @@ class Person(object):
 	def checkDown(self):
 		if self.down_pressed and not self.jump_counter_enabled:
 			if self.on_ground: # If on ground, then duck.
-				if not self.action == Action.DUCK:
+				if not self.action == Action.DUCK and con.audio_support:
 
 					##play duck audio
 					effect = pygame.mixer.Sound(os.path.join('audio','jl_duck.ogg'))

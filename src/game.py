@@ -12,15 +12,20 @@ import scenery
 import objects
 import score
 
-pygame.mixer.pre_init(44100, -16, 2, 4096)
 
 graphics.init(con.SCR_WIDTH, con.SCR_HEIGHT)
 
-pygame.mixer.init()
+try:
+	pygame.mixer.pre_init(44100, -16, 2, 4096)
+	pygame.mixer.init()
+except:
+    print "You don't have audio support."
+    con.audio_support = False
 
-pygame.mixer.music.load(os.path.join('audio','jl_music.ogg'))
-pygame.mixer.music.set_volume(.9)
-pygame.mixer.music.play(-1)
+if con.audio_support:
+	pygame.mixer.music.load(os.path.join('audio','jl_music.ogg'))
+	pygame.mixer.music.set_volume(.9)
+	pygame.mixer.music.play(-1)
 
 scene = scenery.Scenery()
 lawrence = person.Person()
@@ -71,17 +76,21 @@ while(run):
 		for e in ents:
 			if lawrence.rect.colliderect(e.rect):
 				lawrence.collide(e)
+                if con.audio_support:
+					pygame.mixer.stop
 
-				pygame.mixer.stop
+					effect = pygame.mixer.Sound(os.path.join('audio','jl_slap.ogg'))
+					effect.play()
 
-				effect = pygame.mixer.Sound(os.path.join('audio','jl_slap.ogg'))
-				effect.play()
 
-				pygame.mixer.music.stop()
+					effect = pygame.mixer.Sound(os.path.join('audio','jl_slap.ogg'))
+					effect.play()
 
-				pygame.mixer.music.load(os.path.join('audio','endTest.ogg'))
-				pygame.mixer.music.set_volume(.5)
-				pygame.mixer.music.play(-1)
+					pygame.mixer.music.stop()
+
+					pygame.mixer.music.load(os.path.join('audio','endTest.ogg'))
+					pygame.mixer.music.set_volume(.5)
+					pygame.mixer.music.play(-1)
 
 #				endSong = pygame.mixer.music(os.path.join('audio','endTest.ogg'))
 #				endSong.set_volume(.7)
