@@ -5,3 +5,5 @@ SCR_WIDTH  = 320
 SCR_HEIGHT = 160
 
 GROUND_Y = SCR_HEIGHT - 15
+
+audio_support = True

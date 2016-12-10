@@ -128,8 +128,9 @@ class Person(object):
 					self.vs = -Physics.SUPJUMP
 
 
-				effect = pygame.mixer.Sound(os.path.join('audio','jl_jump.ogg'))
-				effect.play()
+                                if con.audio_support:
+				    effect = pygame.mixer.Sound(os.path.join('audio','jl_jump.ogg'))
+				    effect.play()
 
 
 				self.jump_released = False
