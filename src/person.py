@@ -161,10 +161,14 @@ class Person(object):
 	def checkDown(self):
 		if self.down_pressed and not self.jump_counter_enabled:
 			if self.on_ground: # If on ground, then duck.
+				if not self.action == Action.DUCK:
+
+					##play duck audio
+					effect = pygame.mixer.Sound(os.path.join('audio','jl_duck.ogg'))
+					effect.play()
+
 				self.action = Action.DUCK
-				##play duck audio
-			#	effect = pygame.mixer.Sound(os.path.join('audio','jl_duck.ogg'))
-			#	effect.play()
+
 			else: # If in air, then fall.
 				self.falling = True
 				##play fall audio

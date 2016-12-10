@@ -18,7 +18,8 @@ graphics.init(con.SCR_WIDTH, con.SCR_HEIGHT)
 
 pygame.mixer.init()
 
-pygame.mixer.music.load(os.path.join('audio','jl_music.mp3'))
+pygame.mixer.music.load(os.path.join('audio','jl_music.ogg'))
+pygame.mixer.music.set_volume(.9)
 pygame.mixer.music.play(-1)
 
 scene = scenery.Scenery()
@@ -76,8 +77,18 @@ while(run):
 				effect = pygame.mixer.Sound(os.path.join('audio','jl_slap.ogg'))
 				effect.play()
 
-				pygame.mixer.music.load(os.path.join('audio','endTest.mp3'))
-				pygame.mixer.music.play()
+				pygame.mixer.music.stop()
+
+				pygame.mixer.music.load(os.path.join('audio','endTest.ogg'))
+				pygame.mixer.music.set_volume(.5)
+				pygame.mixer.music.play(-1)
+
+#				endSong = pygame.mixer.music(os.path.join('audio','endTest.ogg'))
+#				endSong.set_volume(.7)
+#				endSong.play()
+#				pygame.mixer.music.load(os.path.join('audio','endTest.mp3'))
+#				pygame.mixer.set_volume
+#				pygame.mixer.music.play()
 
 	if lag > con.ms_per_frame:
 		graphics.update()
