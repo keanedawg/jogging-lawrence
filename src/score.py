@@ -7,7 +7,7 @@ import os
 class Score(object):
     def __init__(self):
         self._score = 0
-	self.sprite_sheet = graphics.load_image(os.path.join("img", "score.png"))
+        self.sprite_sheet = graphics.load_image(os.path.join("img", "score.png"))
         self.nums = [x*20 for x in xrange(0,10)]
         self.pad = 2
         self.wid = 20

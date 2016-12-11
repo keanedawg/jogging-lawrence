@@ -9,6 +9,9 @@ _backBuf = None
 _entities = []
 _map = None
 
+def reset():
+	del _entities[:]
+
 # adds entity to entities - which holds what needs to be drawn
 # each entity needs sprite_sheet, frame, weight
 # , and FRAMES (ann array of x and y coods representing the positions on teh sprite sheet)
