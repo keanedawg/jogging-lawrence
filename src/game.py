@@ -28,15 +28,46 @@ sc = score.Score()
 ents = []
 for x in xrange(6,500):
 	if x % 2 == 0:
-		y = random.randint(1,4)
-		if y == 1:
-			ents.append(objects.Bird((x * 80) + random.randint(0,100)))
-		elif y == 2:
-			ents.append(objects.Ball((x * 80) + random.randint(0,100)))
-		elif y == 3:
-			ents.append(objects.Cone((x * 80) + random.randint(0,100)))
-		elif y == 4:
-			ents.append(objects.Hurdle((x * 80) + random.randint(0,100)))
+		if x < 100:
+			y = random.randint(0,5)
+			if y == 1:
+				ents.append(objects.Bird((x * 90) + random.randint(0,40)))
+			elif y == 2:
+				ents.append(objects.Ball((x * 90) + random.randint(0,40)))
+			elif y == 3:
+				ents.append(objects.Cone((x * 90) + random.randint(0,40)))
+			elif y == 4:
+				ents.append(objects.Hurdle((x * 90) + random.randint(0,40)))
+		elif x >= 100 and x < 300:
+			y = random.randint(0,5)
+			if y == 1:
+				ents.append(objects.Bird((x * 85) + random.randint(0,40)))
+			elif y == 2:
+				ents.append(objects.Ball((x * 85) + random.randint(0,40)))
+			elif y == 3:
+				ents.append(objects.Cone((x * 85) + random.randint(0,40)))
+			elif y == 4:
+				ents.append(objects.Hurdle((x * 85) + random.randint(0,40)))
+			elif y == 5:
+				ents.append(objects.Cone(x * 85))
+				ents.append(objects.Cone((x * 85) + 20))
+		elif x >= 300:
+			y = random.randint(0,6)
+			if y == 1:
+				ents.append(objects.Bird((x * 80) + random.randint(0,40)))
+			elif y == 2:
+				ents.append(objects.Ball((x * 80) + random.randint(0,40)))
+			elif y == 3:
+				ents.append(objects.Cone((x * 80) + random.randint(0,40)))
+			elif y == 4:
+				ents.append(objects.Hurdle((x * 80) + random.randint(0,40)))
+			elif y == 5:
+				ents.append(objects.Cone(x * 80))
+				ents.append(objects.Cone((x * 80) + 20))
+			elif y == 6:
+				ents.append(objects.Cone(x * 80))
+				ents.append(objects.Cone((x * 80) + 20))
+				ents.append(objects.Cone((x * 80) + 40))
 
 graphics.register(scene)
 graphics.register(lawrence)
