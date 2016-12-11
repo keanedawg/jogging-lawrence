@@ -11,6 +11,7 @@ import gamespeed
 import scenery
 import objects
 import score
+import audio
 
 def game_start():
 	global run,scene,lawrence,sc,ents,clock,lag,restart
@@ -36,8 +37,8 @@ def game_start():
 		graphics.register(e)
 
 	clock = pygame.time.Clock()
-	
 	lag = 0
+	pygame.mixer.music.play(-1)
 
 def game_loop():
 	global events,run,scene,lawrence,sc,ents,clock,lag,restart,ms
@@ -66,20 +67,9 @@ def game_loop():
 					lawrence.collide(e)
 					restart = True
 					if con.audio_support:
-						pygame.mixer.stop
-	
-						effect = pygame.mixer.Sound(os.path.join('audio','jl_slap.ogg'))
-						effect.play()
-	
-						effect = pygame.mixer.Sound(os.path.join('audio','jl_slap.ogg'))
-						effect.play()
-	
 						pygame.mixer.music.stop()
-	
-						pygame.mixer.music.load(os.path.join('audio','endTest.ogg'))
-						pygame.mixer.music.set_volume(.5)
-						pygame.mixer.music.play(-1)
-	
+						#audio.end_song.play(-1)
+
 		if lag > con.ms_per_frame:
 			graphics.update()
 			lag -= con.ms_per_frame
@@ -108,18 +98,19 @@ def main():
 	graphics.init(con.SCR_WIDTH, con.SCR_HEIGHT)
 	ents = []
 	sc = score.Score()
-	
+
 	try:
 		pygame.mixer.pre_init(44100, -16, 2, 4096)
 		pygame.mixer.init()
 	except:
 		print "You don't have audio support."
 		con.audio_support = False
-	
+
 	if con.audio_support:
+		audio.load_audio()
+
 		pygame.mixer.music.load(os.path.join('audio','jl_music.ogg'))
 		pygame.mixer.music.set_volume(.9)
-		pygame.mixer.music.play(-1)
 	
 	while run:
 		game_start()
