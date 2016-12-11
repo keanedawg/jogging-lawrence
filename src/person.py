@@ -6,6 +6,7 @@ import graphics
 import events
 import constants as con
 import gamespeed
+import audio
 from objects import EntityType as et
 
 class Physics(object):
@@ -128,7 +129,7 @@ class Person(object):
 					self.vs = -Physics.SUPJUMP
 
 				if con.audio_support:
-					effect.play()
+					audio.jump_sound.play()
 
 				self.jump_released = False
 				self.action = Action.JUMP
@@ -160,19 +161,14 @@ class Person(object):
 		if self.down_pressed and not self.jump_counter_enabled:
 			if self.on_ground: # If on ground, then duck.
 				if not self.action == Action.DUCK and con.audio_support:
-
 					##play duck audio
-					effect = pygame.mixer.Sound(os.path.join('audio','jl_duck.ogg'))
-					effect.play()
+					if con.audio_support:
+						audio.duck_sound.play()
 
 				self.action = Action.DUCK
 
 			else: # If in air, then fall.
 				self.falling = True
-				##play fall audio
-			#	segfaults here??
-			#	effect = pygame.mixer.Sound(os.path.join('audio','jl_duck.ogg'))
-			#	effect.play()
 
 
 	# What happens when the player presses down.
@@ -202,6 +198,8 @@ class Person(object):
 		if entity.type == et.BALL or entity.type == et.BIRD or entity.type == et.CONE or entity.type == et.HURDLE:
 			entity.hit()
 			self.kill()
+			if con.audio_support:
+				audio.slap_sound.play()
 
 		elif entity.type == et.PIZZA or entity.type == et.HAMBURGER or entity.type == et.CHEESECAKE:
 			entity.hit()
