@@ -12,8 +12,6 @@ import scenery
 import objects
 import score
 
-run = True
-
 def game_start():
 	global run,scene,lawrence,sc,ents,clock,lag,restart
 	restart = False
@@ -103,26 +101,32 @@ def game_end():
 	gamespeed.reset()
 	sc.reset()
 
-graphics.init(con.SCR_WIDTH, con.SCR_HEIGHT)
-ents = []
-sc = score.Score()
+def main():
+	global run,ents,sc
+	run = True
 
-try:
-	pygame.mixer.pre_init(44100, -16, 2, 4096)
-	pygame.mixer.init()
-except:
-    print "You don't have audio support."
-    con.audio_support = False
+	graphics.init(con.SCR_WIDTH, con.SCR_HEIGHT)
+	ents = []
+	sc = score.Score()
+	
+	try:
+		pygame.mixer.pre_init(44100, -16, 2, 4096)
+		pygame.mixer.init()
+	except:
+		print "You don't have audio support."
+		con.audio_support = False
+	
+	if con.audio_support:
+		pygame.mixer.music.load(os.path.join('audio','jl_music.ogg'))
+		pygame.mixer.music.set_volume(.9)
+		pygame.mixer.music.play(-1)
+	
+	while run:
+		game_start()
+		game_loop()
+		game_end()
 
-if con.audio_support:
-	pygame.mixer.music.load(os.path.join('audio','jl_music.ogg'))
-	pygame.mixer.music.set_volume(.9)
-	pygame.mixer.music.play(-1)
+	pygame.quit()
 
-while run:
-	game_start()
-	game_loop()
-	game_end()
-
-pygame.quit()
-
+if __name__ == "__main__":
+	main()
