@@ -121,6 +121,7 @@ def game_start():
 	lag = 0
 	if con.audio_support:
 		pygame.mixer.music.play(-1)
+		audio.yay_sound.play()
 
 def game_loop():
 	global events,run,scene,lawrence,sc,ents,clock,lag,restart,ms
@@ -190,9 +191,9 @@ def main():
 	if con.audio_support:
 		audio.load_audio()
 
-		pygame.mixer.music.load(os.path.join('audio','jl_music.ogg'))
+		pygame.mixer.music.load(os.path.join('audio','jl_music2.ogg'))
 		pygame.mixer.music.set_volume(.9)
-	
+
 	while run:
 		game_start()
 		game_loop()

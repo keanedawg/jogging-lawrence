@@ -203,11 +203,15 @@ class Person(object):
 
 		elif entity.type == et.PIZZA or entity.type == et.HAMBURGER or entity.type == et.CHEESECAKE:
 			entity.hit()
+			if con.audio_support:
+				audio.bad_food.play()
 			print "YUM!"
 			# Get bigger
 
 		elif entity.type == et.CELERY or entity.type == et.CARROT or entity.type == et.APPLE:
 			entity.hit()
+			if con.audio_support:
+				audio.good_food.play()
 			print "I'M STILL HUNGRY!"
 			# Get thinner
 
