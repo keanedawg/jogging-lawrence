@@ -59,8 +59,11 @@ class Food(object):
 		self.y = con.GROUND_Y - OBJECT_SIZE * 3
 
 	def hit(self):
-		self.vs = _OBJ_VS
+		if self.gravity:
+			return 0
+		self.vs = -self.weight
 		self.gravity = True
+		return self.val
 
 	def draw(self):
 		img = self.sprite_sheet.subsurface(self.FRAMES[int(self.frame)])
@@ -76,21 +79,16 @@ class Food(object):
 
 	def update(self):
 		self.move()
-		self.updateFrame()
 		self.rect.x, self.rect.y = self.x, self.y
-
-	def checkEaten(self):
-		pass
-
-	def destroyFruit(self):
-		pass
-
-	def updateFrame(self):
-		pass
+		if self.rect.y > con.SCR_HEIGHT:
+			self.kill()
 
 	def draw(self):
 		img = self.sprite_sheet.subsurface(self.FRAMES[0])
 		graphics.blit(img, (self.x, self.y))
+
+	def kill(self):
+		self.alive = False
 
 ########## Food ###############
 
@@ -100,6 +98,8 @@ class Pizza(Food):
 		# The type contains the vertical offset as well.
 		super(Pizza, self).__init__(EntityType.PIZZA, xoff, True)
 		self.type = EntityType.PIZZA
+		self.val = -10
+		self.weight = 6
 
 class Hamburger(Food):
 	# The x is how far away from the starting point of the ground the bird is and remains.
@@ -107,6 +107,8 @@ class Hamburger(Food):
 		# The type contains the vertical offset as well.
 		super(Hamburger, self).__init__(EntityType.HAMBURGER, xoff, False)
 		self.type = EntityType.HAMBURGER
+		self.val = -20
+		self.weight = 5
 
 class Cheesecake(Food):
 	# The x is how far away from the starting point of the ground the bird is and remains.
@@ -114,6 +116,8 @@ class Cheesecake(Food):
 		# The type contains the vertical offset as well.
 		super(Cheesecake, self).__init__(EntityType.CHEESECAKE, xoff, False)
 		self.type = EntityType.CHEESECAKE
+		self.val = -30
+		self.weight = 4
 
 class Celery(Food):
 	# The x is how far away from the starting point of the ground the bird is and remains.
@@ -121,6 +125,8 @@ class Celery(Food):
 		# The type contains the vertical offset as well.
 		super(Celery, self).__init__(EntityType.CELERY, xoff, False)
 		self.type = EntityType.CELERY
+		self.val = 5
+		self.weight = 9
 
 class Carrot(Food):
 	# The x is how far away from the starting point of the ground the bird is and remains.
@@ -128,6 +134,8 @@ class Carrot(Food):
 		# The type contains the vertical offset as well.
 		super(Carrot, self).__init__(EntityType.CARROT, xoff, False)
 		self.type = EntityType.CARROT
+		self.val = 10
+		self.weight = 8
 
 class Apple(Food):
 	# The x is how far away from the starting point of the ground the bird is and remains.
@@ -135,6 +143,8 @@ class Apple(Food):
 		# The type contains the vertical offset as well.
 		super(Apple, self).__init__(EntityType.APPLE, xoff, False)
 		self.type = EntityType.APPLE
+		self.val = 15
+		self.weight = 7
 
 class Obstacle(object):
 	# ss_off - The vertical offset for the sprite sheet.

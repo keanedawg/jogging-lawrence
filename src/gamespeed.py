@@ -3,11 +3,11 @@ import constants as con
 
 # Constants
 _START_SPEED = con.SCR_WIDTH * 3/8 / con.framerate
-_MAX_SPEED = 2.0 * _START_SPEED
-_SPEED_LEVELS = 3.0
+_MAX_SPEED = 3.0 * _START_SPEED
+_SPEED_LEVELS = 20.0
 
 # The level will speed up every X seconds.
-_ACCELERATION_INTERVAL = int(5 * con.framerate)
+_ACCELERATION_INTERVAL = int(10 * con.framerate)
 _ACCELERATION = (_MAX_SPEED - _START_SPEED) / _SPEED_LEVELS
 
 def update():
@@ -28,7 +28,7 @@ pos   = 0            # The position of the starting point of the ground.
 frame = 0            # How many frames have been running.
 
 def reset():
-	global speed, frame
+	global speed, frame, pos
 	speed = _START_SPEED
 	pos = 0
 	frame = 0

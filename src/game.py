@@ -13,6 +13,8 @@ import objects
 import score
 import audio
 
+ents = []
+
 def game_start():
 	global run,scene,lawrence,sc,ents,clock,lag,restart
 	restart = False
@@ -136,22 +138,25 @@ def game_loop():
 		events.update()
 		lawrence.update()
 		scene.update()
+
 		for e in ents:
 			e.update()
 	
-        	# Update Score
-        	if gamespeed.frame % 15 == 0:
-                	sc.addScore(1)
+		# Update Score
+		if gamespeed.frame % 15 == 0:
+			sc.addScore(1)
 	
 		# Collision
 		if lawrence.isAlive():
 			for e in ents:
 				if lawrence.rect.colliderect(e.rect):
-					lawrence.collide(e)
-					restart = True
-					if con.audio_support:
-						pygame.mixer.music.stop()
-						#audio.end_song.play(-1)
+					if e.type > objects.EntityType.HURDLE: # If it is a food.
+						sc.addScore(e.hit())
+					else:
+						lawrence.collide(e)
+						restart = True
+						if con.audio_support:
+							pygame.mixer.music.stop()
 
 		if lag > con.ms_per_frame:
 			graphics.update()
@@ -174,11 +179,10 @@ def game_end():
 	sc.reset()
 
 def main():
-	global run,ents,sc
+	global ents, sc, run
 	run = True
 
 	graphics.init(con.SCR_WIDTH, con.SCR_HEIGHT)
-	ents = []
 	sc = score.Score()
 
 	try:
@@ -190,7 +194,6 @@ def main():
 
 	if con.audio_support:
 		audio.load_audio()
-
 		pygame.mixer.music.load(os.path.join('audio','jl_music2.ogg'))
 		pygame.mixer.music.set_volume(.9)
 

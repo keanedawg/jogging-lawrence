@@ -38,6 +38,9 @@ class Score(object):
 
     def addScore(self,score):
         self._score += score
+        if self._score < 0:
+            self._score = 0
+
         
     def reset(self):
-        self.score = 0
+        self._score = 0
