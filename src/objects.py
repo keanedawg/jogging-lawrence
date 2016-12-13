@@ -63,6 +63,9 @@ class Food(object):
 			return 0
 		self.vs = -self.weight
 		self.gravity = True
+		if con.audio_support:
+			self.sound.play()
+
 		return self.val
 
 	def draw(self):
@@ -100,6 +103,7 @@ class Pizza(Food):
 		self.type = EntityType.PIZZA
 		self.val = -10
 		self.weight = 6
+		self.sound = audio.bad_food
 
 class Hamburger(Food):
 	# The x is how far away from the starting point of the ground the bird is and remains.
@@ -109,6 +113,7 @@ class Hamburger(Food):
 		self.type = EntityType.HAMBURGER
 		self.val = -20
 		self.weight = 5
+		self.sound = audio.bad_food
 
 class Cheesecake(Food):
 	# The x is how far away from the starting point of the ground the bird is and remains.
@@ -118,6 +123,7 @@ class Cheesecake(Food):
 		self.type = EntityType.CHEESECAKE
 		self.val = -30
 		self.weight = 4
+		self.sound = audio.bad_food
 
 class Celery(Food):
 	# The x is how far away from the starting point of the ground the bird is and remains.
@@ -127,6 +133,7 @@ class Celery(Food):
 		self.type = EntityType.CELERY
 		self.val = 5
 		self.weight = 9
+		self.sound = audio.good_food
 
 class Carrot(Food):
 	# The x is how far away from the starting point of the ground the bird is and remains.
@@ -136,6 +143,7 @@ class Carrot(Food):
 		self.type = EntityType.CARROT
 		self.val = 10
 		self.weight = 8
+		self.sound = audio.good_food
 
 class Apple(Food):
 	# The x is how far away from the starting point of the ground the bird is and remains.
@@ -145,6 +153,7 @@ class Apple(Food):
 		self.type = EntityType.APPLE
 		self.val = 15
 		self.weight = 7
+		self.sound = audio.good_food
 
 class Obstacle(object):
 	# ss_off - The vertical offset for the sprite sheet.
