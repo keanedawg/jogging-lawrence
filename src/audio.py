@@ -19,10 +19,10 @@ def load_audio():
 	jump_sound.set_volume(.9)
 
 	bad_food = pygame.mixer.Sound(os.path.join('audio','jl_badFood.ogg'))
-	bad_food.set_volume(.8)
+	bad_food.set_volume(.9)
 
 	good_food = pygame.mixer.Sound(os.path.join('audio','jl_goodFood.ogg'))
-	good_food.set_volume(.8)
+	good_food.set_volume(.6)
 
 	yay_sound = pygame.mixer.Sound(os.path.join('audio','jl_yay.ogg'))
 	yay_sound.set_volume(.4)
