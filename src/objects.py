@@ -6,6 +6,7 @@ import graphics
 import events
 import constants as con
 import gamespeed
+import audio
 
 OBJECT_SIZE=20
 OBJECT_FRAME_SPEED=.025
