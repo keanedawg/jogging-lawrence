@@ -9,8 +9,8 @@ _FORE_Y_POS = con.SCR_HEIGHT - 30 # Where the foreground will be drawn.
 
 class Scenery(object):
 	def __init__(self):
-		self.bkgdImg  = graphics.load_image(os.path.join("img", "farm.png"))
-		self.foreImg  = graphics.load_image(os.path.join("img", "grass_fore.png"))
+		self.bkgdImg  = graphics.load_image(os.path.join("img", "city.png"))
+		self.foreImg  = graphics.load_image(os.path.join("img", "street.png"))
 
 		self.bkgd_W = self.bkgdImg.get_width()
 		self.bkgd_X = 0.
