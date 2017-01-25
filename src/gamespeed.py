@@ -2,12 +2,12 @@
 import constants as con
 
 # Constants
-_START_SPEED = con.SCR_WIDTH * 3/8 / con.framerate
-_MAX_SPEED = 3.0 * _START_SPEED
-_SPEED_LEVELS = 20.0
+_START_SPEED = con.SCR_WIDTH * 4/8 / con.framerate
+_MAX_SPEED = 6.0 * _START_SPEED
+_SPEED_LEVELS = 16
 
 # The level will speed up every X seconds.
-_ACCELERATION_INTERVAL = int(10 * con.framerate)
+_ACCELERATION_INTERVAL = int(20 * con.framerate)
 _ACCELERATION = (_MAX_SPEED - _START_SPEED) / _SPEED_LEVELS
 
 def update():
