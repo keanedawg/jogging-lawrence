@@ -21,7 +21,7 @@ def game_start():
 	scene = scenery.Scenery()
 	lawrence = person.Person()
 
-	for x in xrange(6,500):
+	for x in range(6,500):
 		if x % 2 == 0:
 			if x < 100:
 				y = random.randint(0,7)
@@ -189,7 +189,7 @@ def main():
 		pygame.mixer.pre_init(44100, -16, 2, 4096)
 		pygame.mixer.init()
 	except:
-		print "You don't have audio support."
+		print ("You don't have audio support.")
 		con.audio_support = False
 
 	if con.audio_support:

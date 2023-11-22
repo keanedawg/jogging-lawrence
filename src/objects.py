@@ -38,8 +38,8 @@ class Food(object):
 		self.x = gamespeed.pos + self.xoff
 		self.y = 0.
 		self.rect = pygame.Rect(self.x, self.y, OBJECT_SIZE, OBJECT_SIZE)
-		self.FRAMES = [(i * OBJECT_SIZE, ss_off * OBJECT_SIZE, OBJECT_SIZE, OBJECT_SIZE) for i in xrange(OBJECT_NUM_OF_FRAMES)]
-		self.frame = i * OBJECT_SIZE
+		self.FRAMES = [(i * OBJECT_SIZE, ss_off * OBJECT_SIZE, OBJECT_SIZE, OBJECT_SIZE) for i in range(OBJECT_NUM_OF_FRAMES)]
+		self.frame = 0
 		self.gravity = False
 		self.vs = 0.
 
@@ -167,7 +167,7 @@ class Obstacle(object):
 		self.x = gamespeed.pos + self.xoff
 		self.y = 0.
 		self.rect = pygame.Rect(self.x, self.y, OBJECT_SIZE, OBJECT_SIZE)
-		self.FRAMES = [(i * OBJECT_SIZE, ss_off * OBJECT_SIZE, OBJECT_SIZE, OBJECT_SIZE) for i in xrange(OBJECT_NUM_OF_FRAMES)]
+		self.FRAMES = [(i * OBJECT_SIZE, ss_off * OBJECT_SIZE, OBJECT_SIZE, OBJECT_SIZE) for i in range(OBJECT_NUM_OF_FRAMES)]
 		self.frame = 0.
 		self.gravity = False
 		self.vs = 0.

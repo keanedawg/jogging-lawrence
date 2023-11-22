@@ -18,7 +18,7 @@ class Patch():
 		self.obstacles
 
 	def generateObstacles():
-		for i in xrange(randint(1,3)):
+		for i in range(randint(1,3)):
 			if self.amountOfObstacles > 1
 			&& (self.obstacles[0].typeOfObstacle == Obstacles.CONE || self.obstacles[0].typeOfObstacle == Obstacles.HURDLE)
 			self.obstacles.append(Obstacle())

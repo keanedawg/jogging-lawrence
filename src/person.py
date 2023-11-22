@@ -45,7 +45,7 @@ class Action(object):
 	DUCK = 2
 
 class Person(object):
-	FRAMES = [(x * _SPR_DIM, y * _SPR_DIM, _SPR_DIM, _SPR_DIM) for y in xrange(_SPR_ROWS) for x in xrange(_SPR_COLS)]
+	FRAMES = [(x * _SPR_DIM, y * _SPR_DIM, _SPR_DIM, _SPR_DIM) for y in range(_SPR_ROWS) for x in range(_SPR_COLS)]
 
 	def __init__(self):
 		self.sprite_sheet = graphics.load_image(os.path.join("img", "jogging_lawrence.png"))
@@ -205,14 +205,14 @@ class Person(object):
 			entity.hit()
 			if con.audio_support:
 				audio.bad_food.play()
-			print "YUM!"
+			print ("YUM!")
 			# Get bigger
 
 		elif entity.type == et.CELERY or entity.type == et.CARROT or entity.type == et.APPLE:
 			entity.hit()
 			if con.audio_support:
 				audio.good_food.play()
-			print "I'M STILL HUNGRY!"
+			print ("I'M STILL HUNGRY!")
 			# Get thinner
 
 		else:
