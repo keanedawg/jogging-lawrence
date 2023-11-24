@@ -137,12 +137,12 @@ class Person(object):
 	# This handles the input.
 	def input(self):
 		for event in events.event_queue:
-			if event.type is pygame.KEYDOWN:
+			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_SPACE:
 					self.pressSpace()
 				elif event.key == pygame.K_DOWN:
 					self.pressDown()
-			elif event.type is pygame.KEYUP:
+			elif event.type == pygame.KEYUP:
 				if event.key == pygame.K_SPACE:
 					self.releaseSpace()
 				elif event.key == pygame.K_DOWN:
