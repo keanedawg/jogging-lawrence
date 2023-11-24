@@ -41,7 +41,7 @@ def update():
 	for entity in _entities:
 		entity.draw()
 
-	pygame.transform.scale(_backBuf, (_width, _height), _screen)
+	pygame.transform.scale(_backBuf, _screen.get_size(), _screen)
 	pygame.display.flip()
 
 def blit(surface, pos):
